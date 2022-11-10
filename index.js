@@ -233,6 +233,27 @@ app.get('/reviews/:name', async (req,res)=>{
     }
  })
 
+//Find Review Data By Email
+app.get('/reviewemail/:email', async (req,res)=>{
+    try{
+        console.log(req.params.name);
+     const cursor = {email: req.params.email};
+     const result = Review.find(cursor);
+     const user = await result.toArray();
+     res.send({
+         success: true,
+         message: "Successfully Find The Data",
+         data: user,
+     })
+    }catch(error){
+     res.send({
+         data: {}, 
+         success: false, 
+         message: error.message
+     })
+    }
+ })
+
 
 // All Blog
 app.get("/blog", async (req, res)=>{
